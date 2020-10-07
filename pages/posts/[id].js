@@ -5,7 +5,8 @@ import Head from "next/head";
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 
-export default function Post({ postData }) {
+export default function Post({ postData, testData }) {
+    console.log(testData)
     return (
         <Layout>
             <Head>
@@ -32,9 +33,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({params}) {
     const postData = await getPostData(params.id)
+    const res = await fetch("https://run.mocky.io/v3/2541b054-2dea-42ff-bd17-536ab9f66e1e")
+    const testData = await res.json()
     return{
         props: {
-            postData
+            postData,
+            testData
         }
     }
 }
